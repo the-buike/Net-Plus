@@ -1,0 +1,66 @@
+{
+  "name": "N+ Fieldbook",
+  "short_name": "N+ Fieldbook",
+  "description": "CompTIA Network+ N10-009 field manual \u2014 flashcards, Port Rush game, quick reference. Works offline.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#1C1F16",
+  "theme_color": "#1C1F16",
+  "orientation": "any",
+  "categories": [
+    "education",
+    "utilities"
+  ],
+  "icons": [
+    {
+      "src": "icons/icon-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-180.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "apple touch icon"
+    },
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Flashcards",
+      "short_name": "Cards",
+      "description": "Jump to flashcard study mode",
+      "url": "./index.html#flash",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Port Rush Game",
+      "short_name": "Port Rush",
+      "description": "Play the port-matching speed game",
+      "url": "./index.html#game",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>N+ FIELDBOOK | CompTIA Network+ Study</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1C1F16">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="N+ Fieldbook">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ── TOKENS ─────────────────────────────────────────────────────── */
+:root {
+  --bg:       #1C1F16;
+  --surface:  #252920;
+  --card:     #2E3320;
+  --raised:   #363C28;
+  --border:   #4A5240;
+  --border-lt:#5C6450;
+  --olive:    #8B9E5A;   /* primary accent */
+  --gold:     #C8B97A;   /* highlight / numbers */
+  --red:      #C0503A;   /* wrong / danger */
+  --text:     #E8E4D4;
+  --muted:    #8A8A78;
+  --dim:      #5C5C50;
+  --display:  'Rajdhani', sans-serif;
+  --mono:     'IBM Plex Mono', monospace;
+  --body:     'Inter', sans-serif;
+  --tab-h:    60px;      /* bottom tab bar height */
+  --nav-h:    52px;
+}
+
+*,*::before,*::after { box-sizing: border-box; margin:0; padding:0; }
+
+html { height:100%; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--body);
+  min-height: 100%;
+  overflow-x: hidden;
+  /* Topographic SVG texture baked in */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cpath d='M0 200 Q50 150 100 200 Q150 250 200 200 Q250 150 300 200 Q350 250 400 200' fill='none' stroke='%234A5240' stroke-width='0.8' opacity='0.4'/%3E%3Cpath d='M0 220 Q50 170 100 220 Q150 270 200 220 Q250 170 300 220 Q350 270 400 220' fill='none' stroke='%234A5240' stroke-width='0.6' opacity='0.3'/%3E%3Cpath d='M0 240 Q50 190 100 240 Q150 290 200 240 Q250 190 300 240 Q350 290 400 240' fill='none' stroke='%234A5240' stroke-width='0.5' opacity='0.2'/%3E%3Cpath d='M0 180 Q50 130 100 180 Q150 230 200 180 Q250 130 300 180 Q350 230 400 180' fill='none' stroke='%234A5240' stroke-width='0.6' opacity='0.3'/%3E%3Cpath d='M0 160 Q50 110 100 160 Q150 210 200 160 Q250 110 300 160 Q350 210 400 160' fill='none' stroke='%234A5240' stroke-width='0.5' opacity='0.2'/%3E%3Cpath d='M0 100 Q60 60 120 100 Q180 140 240 100 Q300 60 360 100 Q400 130 400 100' fill='none' stroke='%234A5240' stroke-width='0.5' opacity='0.15'/%3E%3Cpath d='M0 300 Q60 260 120 300 Q180 340 240 300 Q300 260 360 300 Q400 330 400 300' fill='none' stroke='%234A5240' stroke-width='0.5' opacity='0.15'/%3E%3C/svg%3E");
+  background-size: 400px 400px;
+}
+
+/* ── DESKTOP TOP NAV ──────────────────────────────────────────── */
+#topNav {
+  height: var(--nav-h);
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: stretch;
+  padding: 0 1.5rem;
+  position: sticky; top: 0; z-index: 100;
+  gap: 0;
+}
+.nav-logo {
+  display: flex; align-items: center;
+  font-family: var(--display);
+  font-size: 1.25rem; font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--text);
+  text-transform: uppercase;
+  margin-right: 2rem;
+  flex-shrink: 0;
+}
+.nav-logo span { color: var(--olive); }
+.nav-logo sup {
+  font-size: 0.55rem; font-family: var(--mono);
+  color: var(--muted); letter-spacing: 0.05em;
+  margin-left: 0.35rem; align-self: flex-start; margin-top: 0.6rem;
+}
+.top-nav-links { display: flex; align-items: stretch; gap: 0; }
+.top-tab {
+  display: flex; align-items: center; gap: 0.4rem;
+  padding: 0 1.2rem;
+  font-family: var(--display);
+  font-size: 0.82rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--muted);
+  background: none; border: none;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+  position: relative;
+}
+.top-tab:hover { color: var(--text); }
+.top-tab.active { color: var(--olive); border-bottom-color: var(--olive); }
+.top-tab .tab-icon { font-size: 0.9rem; }
+
+/* offline pill in nav */
+.nav-right { margin-left: auto; display: flex; align-items: center; gap: 0.75rem; }
+.sw-badge {
+  font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.1em;
+  padding: 0.2rem 0.5rem; border-radius: 2px;
+  background: rgba(139,158,90,0.15); color: var(--olive);
+  border: 1px solid rgba(139,158,90,0.3);
+  display: none;
+}
+.sw-badge.visible { display: inline-block; }
+
+/* ── BOTTOM TAB BAR (mobile) ─────────────────────────────────── */
+#bottomNav {
+  display: none;
+  position: fixed; bottom: 0; left: 0; right: 0;
+  height: var(--tab-h);
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  z-index: 100;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.bottom-tabs {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  height: 100%;
+}
+.bot-tab {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 0.25rem;
+  font-family: var(--display);
+  font-size: 0.6rem; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted);
+  background: none; border: none; cursor: pointer;
+  transition: color 0.15s;
+  position: relative;
+}
+.bot-tab::before {
+  content: '';
+  position: absolute; top: 0; left: 25%; right: 25%;
+  height: 2px; background: var(--olive);
+  transform: scaleX(0); transition: transform 0.2s;
+}
+.bot-tab.active { color: var(--olive); }
+.bot-tab.active::before { transform: scaleX(1); }
+.bot-tab .bicon { font-size: 1.1rem; line-height: 1; }
+
+/* ── RESPONSIVE SWITCH ───────────────────────────────────────── */
+@media (max-width: 640px) {
+  #topNav .top-nav-links { display: none; }
+  #bottomNav { display: block; }
+  .page-content { padding-bottom: calc(var(--tab-h) + env(safe-area-inset-bottom) + 1rem); }
+}
+@media (min-width: 641px) {
+  #topNav .top-nav-links { display: flex; }
+  #bottomNav { display: none; }
+}
+
+/* ── PAGE / PANEL ────────────────────────────────────────────── */
+.page-content { max-width: 860px; margin: 0 auto; padding: 1.75rem 1.25rem; }
+.panel { display: none; }
+.panel.active { display: block; }
+
+/* ── SECTION LABEL ───────────────────────────────────────────── */
+.sec-label {
+  font-family: var(--mono);
+  font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--dim); margin-bottom: 1rem;
+  display: flex; align-items: center; gap: 0.6rem;
+}
+.sec-label::after { content:''; flex:1; height:1px; background: var(--border); }
+
+/* ── HOME ────────────────────────────────────────────────────── */
+.hero-block {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--olive);
+  border-radius: 4px;
+  padding: 2rem 1.75rem;
+  margin-bottom: 1.5rem;
+  position: relative; overflow: hidden;
+}
+.hero-block::after {
+  content: 'N10-009';
+  position: absolute; right: 1.5rem; top: 1.5rem;
+  font-family: var(--mono); font-size: 0.65rem;
+  color: var(--border); letter-spacing: 0.15em;
+}
+.hero-title {
+  font-family: var(--display);
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-weight: 700; line-height: 1.1;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--text); margin-bottom: 0.6rem;
+}
+.hero-title em { font-style: normal; color: var(--olive); }
+.hero-sub {
+  font-size: 0.85rem; color: var(--muted);
+  line-height: 1.6; max-width: 440px; margin-bottom: 1.5rem;
+}
+.stat-row { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+.stat-item { display: flex; flex-direction: column; }
+.stat-num {
+  font-family: var(--mono); font-size: 1.5rem; font-weight: 500;
+  color: var(--gold); line-height: 1;
+}
+.stat-lbl {
+  font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--dim);
+  margin-top: 0.2rem;
+}
+
+.domain-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 0.75rem; margin-bottom: 1.75rem;
+}
+.domain-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  display: flex; align-items: flex-start; gap: 0.75rem;
+}
+.domain-card:hover {
+  background: var(--raised);
+  border-color: var(--border-lt);
+}
+.dc-icon {
+  width: 32px; height: 32px; flex-shrink: 0;
+  background: var(--raised); border: 1px solid var(--border);
+  border-radius: 3px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+}
+.dc-info { min-width: 0; }
+.dc-name {
+  font-family: var(--display); font-weight: 600; font-size: 0.82rem;
+  letter-spacing: 0.05em; text-transform: uppercase; color: var(--text);
+  line-height: 1.2; margin-bottom: 0.2rem;
+}
+.dc-count { font-family: var(--mono); font-size: 0.62rem; color: var(--muted); }
+
+/* ── FLASHCARDS ──────────────────────────────────────────────── */
+.fc-controls {
+  display: flex; align-items: center; gap: 0.75rem;
+  margin-bottom: 1.25rem; flex-wrap: wrap;
+}
+.field-select {
+  background: var(--card); border: 1px solid var(--border);
+  color: var(--text); font-family: var(--mono); font-size: 0.72rem;
+  padding: 0.45rem 0.75rem; border-radius: 3px; cursor: pointer;
+  flex: 1; min-width: 180px;
+}
+.field-select:focus { outline: 1px solid var(--olive); }
+.fc-meta {
+  display: flex; align-items: center; gap: 0.6rem;
+  font-family: var(--mono); font-size: 0.68rem; color: var(--muted);
+  margin-left: auto;
+}
+.pbar { width: 100px; height: 3px; background: var(--border); border-radius: 1px; overflow: hidden; }
+.pfill { height: 100%; background: var(--olive); transition: width 0.4s ease; }
+
+/* Card flip */
+.card-scene { perspective: 1200px; width: 100%; height: 260px; max-width: 640px; margin: 0 auto; }
+.card-inner {
+  width: 100%; height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.45s cubic-bezier(.4,0,.2,1);
+  cursor: pointer;
+}
+.card-inner.flipped { transform: rotateY(180deg); }
+.card-face {
+  position: absolute; width: 100%; height: 100%;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  border-radius: 3px; border: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 1.75rem; text-align: center;
+}
+.card-front { background: var(--card); border-top: 3px solid var(--border-lt); }
+.card-back  {
+  background: var(--raised);
+  border-top: 3px solid var(--olive);
+  transform: rotateY(180deg);
+}
+.card-domain-tag {
+  font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--dim); margin-bottom: 0.9rem;
+}
+.card-back .card-domain-tag { color: var(--olive); opacity: 0.8; }
+.card-q { font-size: 1rem; font-weight: 600; line-height: 1.55; color: var(--text); }
+.card-a {
+  font-family: var(--mono); font-size: 0.82rem;
+  color: var(--gold); line-height: 1.6;
+}
+.card-tap-hint {
+  position: absolute; bottom: 0.85rem;
+  font-family: var(--mono); font-size: 0.58rem;
+  color: var(--dim); letter-spacing: 0.1em;
+}
+
+.rate-row {
+  display: flex; gap: 0.5rem; justify-content: center;
+  margin-top: 1rem;
+  opacity: 0; transition: opacity 0.25s; pointer-events: none;
+}
+.rate-row.show { opacity: 1; pointer-events: auto; }
+.rate-btn {
+  font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.08em;
+  padding: 0.35rem 0.85rem; border-radius: 2px; border: 1px solid;
+  cursor: pointer; transition: background 0.15s;
+}
+.r-again { border-color: var(--red);    color: var(--red);    background: rgba(192,80,58,0.08); }
+.r-hard  { border-color: var(--gold);   color: var(--gold);   background: rgba(200,185,122,0.08); }
+.r-good  { border-color: var(--border-lt); color: var(--text); background: rgba(92,100,80,0.2); }
+.r-easy  { border-color: var(--olive);  color: var(--olive);  background: rgba(139,158,90,0.1); }
+.r-again:hover { background: rgba(192,80,58,0.2); }
+.r-hard:hover  { background: rgba(200,185,122,0.2); }
+.r-good:hover  { background: rgba(92,100,80,0.35); }
+.r-easy:hover  { background: rgba(139,158,90,0.22); }
+
+.card-nav-row {
+  display: flex; align-items: center; justify-content: center;
+  gap: 0.6rem; margin-top: 1.25rem;
+}
+
+/* ── BUTTONS ─────────────────────────────────────────────────── */
+.btn {
+  font-family: var(--display); font-weight: 600;
+  font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.5rem 1.25rem; border-radius: 2px; border: 1px solid;
+  cursor: pointer; transition: all 0.15s;
+  display: inline-flex; align-items: center; gap: 0.35rem;
+}
+.btn:disabled { opacity: 0.3; cursor: default; }
+.btn-primary { border-color: var(--olive); color: var(--olive); background: rgba(139,158,90,0.1); }
+.btn-primary:hover:not(:disabled) { background: rgba(139,158,90,0.22); }
+.btn-ghost   { border-color: var(--border); color: var(--muted); background: transparent; }
+.btn-ghost:hover:not(:disabled)   { border-color: var(--border-lt); color: var(--text); }
+.btn-gold    { border-color: var(--gold); color: var(--gold); background: rgba(200,185,122,0.08); }
+.btn-gold:hover:not(:disabled)    { background: rgba(200,185,122,0.18); }
+.btn-danger  { border-color: var(--red); color: var(--red); background: rgba(192,80,58,0.08); }
+
+/* ── PORT RUSH GAME ──────────────────────────────────────────── */
+.game-hud {
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 3px; padding: 0.75rem 1rem;
+  margin-bottom: 1rem; gap: 1rem; flex-wrap: wrap;
+}
+.hud-stats { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+.hud-s { display: flex; flex-direction: column; align-items: center; }
+.hud-val {
+  font-family: var(--mono); font-size: 1.3rem; font-weight: 500;
+  color: var(--gold); line-height: 1;
+}
+.hud-val.olive { color: var(--olive); }
+.hud-val.red   { color: var(--red); }
+.hud-lbl { font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--dim); margin-top: 0.15rem; }
+
+/* Timer */
+.timer-wrap { position: relative; width: 52px; height: 52px; flex-shrink: 0; }
+.timer-wrap svg { transform: rotate(-90deg); }
+.t-bg   { fill: none; stroke: var(--border); stroke-width: 4; }
+.t-fill { fill: none; stroke: var(--olive); stroke-width: 4; stroke-linecap: butt; transition: stroke-dashoffset 1s linear, stroke 0.3s; }
+.timer-num {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 1rem; color: var(--olive);
+}
+
+.prompt-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--olive);
+  border-radius: 3px;
+  padding: 1.5rem; text-align: center;
+  margin-bottom: 1rem;
+}
+.prompt-eyebrow {
+  font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--dim); margin-bottom: 0.6rem;
+}
+.prompt-service {
+  font-family: var(--display); font-size: 1.5rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--text);
+}
+.prompt-proto {
+  font-family: var(--mono); font-size: 0.72rem; color: var(--muted); margin-top: 0.3rem;
+}
+
+.answers-grid {
+  display: grid; grid-template-columns: repeat(2,1fr); gap: 0.6rem;
+  margin-bottom: 0.75rem;
+}
+.ans-btn {
+  font-family: var(--mono); font-size: 1.1rem; font-weight: 500;
+  padding: 0.9rem; border-radius: 2px;
+  border: 1px solid var(--border);
+  background: var(--card); color: var(--text);
+  cursor: pointer; transition: all 0.15s; letter-spacing: 0.05em;
+}
+.ans-btn:hover:not(:disabled) { border-color: var(--border-lt); background: var(--raised); }
+.ans-btn.correct { border-color: var(--olive); background: rgba(139,158,90,0.18); color: var(--olive); }
+.ans-btn.wrong   { border-color: var(--red);   background: rgba(192,80,58,0.18);   color: var(--red);   }
+.ans-btn:disabled { cursor: default; }
+
+.feedback-bar {
+  font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.06em;
+  text-align: center; min-height: 1.4rem; color: var(--dim);
+}
+
+.game-splash {
+  text-align: center;
+  background: var(--card); border: 1px solid var(--border);
+  border-top: 3px solid var(--olive);
+  border-radius: 3px; padding: 2.5rem 1.5rem;
+}
+.game-splash h2 {
+  font-family: var(--display); font-size: 1.6rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text); margin-bottom: 0.5rem;
+}
+.game-splash p { font-size: 0.8rem; color: var(--muted); margin-bottom: 1.5rem; line-height: 1.6; }
+
+.result-grid { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 1.75rem; }
+.res-stat { display: flex; flex-direction: column; align-items: center; }
+.res-num { font-family: var(--mono); font-size: 1.5rem; color: var(--gold); }
+.res-lbl { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--dim); }
+.final-score { font-family: var(--mono); font-size: 3rem; color: var(--olive); margin: 0.5rem 0 0.2rem; }
+
+/* ── QUICK REF ───────────────────────────────────────────────── */
+.ref-table {
+  width: 100%; border-collapse: collapse; font-size: 0.8rem;
+  margin-bottom: 1.5rem;
+}
+.ref-table th {
+  font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--muted);
+  padding: 0.5rem 0.75rem; text-align: left;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+.ref-table td {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid rgba(74,82,64,0.4);
+  font-family: var(--mono); font-size: 0.75rem; color: var(--text);
+}
+.ref-table tr:hover td { background: rgba(46,51,32,0.6); }
+.ref-table td:first-child { color: var(--gold); font-weight: 500; }
+.badge {
+  display: inline-block; font-size: 0.55rem; padding: 0.1rem 0.4rem;
+  border-radius: 1px; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid;
+}
+.b-tcp  { color: var(--olive); border-color: rgba(139,158,90,0.4);  background: rgba(139,158,90,0.1); }
+.b-udp  { color: var(--gold);  border-color: rgba(200,185,122,0.4); background: rgba(200,185,122,0.1); }
+.b-both { color: var(--text);  border-color: var(--border); background: var(--raised); }
+
+/* ── OFFLINE BANNER ──────────────────────────────────────────── */
+#offlineBanner {
+  display: none; position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+  background: var(--red); color: var(--text);
+  font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em;
+  text-align: center; padding: 0.35rem;
+  text-transform: uppercase;
+}
+#offlineBanner.show { display: block; }
+
+/* ── INSTALL BAR ─────────────────────────────────────────────── */
+#installBar {
+  display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 98;
+  background: var(--card); border-top: 1px solid var(--olive);
+  padding: 0.75rem 1.25rem;
+  align-items: center; justify-content: space-between; gap: 1rem;
+  padding-bottom: calc(0.75rem + env(safe-area-inset-bottom));
+}
+#installBar.show { display: flex; }
+#installBar p { font-size: 0.8rem; color: var(--text); margin: 0; }
+#installBar p strong { color: var(--olive); font-family: var(--display); letter-spacing: 0.05em; }
+.install-btns { display: flex; gap: 0.5rem; flex-shrink: 0; }
+
+/* ── TOAST ───────────────────────────────────────────────────── */
+#toast {
+  position: fixed; bottom: calc(var(--tab-h) + 0.75rem); right: 1rem;
+  background: var(--raised); border: 1px solid var(--border-lt);
+  color: var(--text); font-family: var(--mono); font-size: 0.72rem;
+  padding: 0.6rem 1rem; border-radius: 2px;
+  transform: translateY(120px); transition: transform 0.25s ease;
+  z-index: 200; max-width: 260px;
+}
+#toast.show { transform: translateY(0); }
+@media (min-width: 641px) {
+  #toast { bottom: 1.5rem; }
+}
+
+/* ── SCROLLBAR ───────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); }
+</style>
+</head>
+<body>
+
+<!-- TOP NAV (desktop) -->
+<nav id="topNav">
+  <div class="nav-logo">N<span>+</span> Fieldbook<sup>N10-009</sup></div>
+  <div class="top-nav-links">
+    <button class="top-tab active" onclick="showTab('home')" data-tab="home">
+      <span class="tab-icon">◈</span> Home
+    </button>
+    <button class="top-tab" onclick="showTab('flash')" data-tab="flash">
+      <span class="tab-icon">⊞</span> Flashcards
+    </button>
+    <button class="top-tab" onclick="showTab('game')" data-tab="game">
+      <span class="tab-icon">▶</span> Port Rush
+    </button>
+    <button class="top-tab" onclick="showTab('ref')" data-tab="ref">
+      <span class="tab-icon">≡</span> Quick Ref
+    </button>
+  </div>
+  <div class="nav-right">
+    <span class="sw-badge" id="swBadge">● OFFLINE READY</span>
+  </div>
+</nav>
+
+<!-- OFFLINE BANNER -->
+<div id="offlineBanner">⚠ OFFLINE — SERVING FROM CACHE</div>
+
+<div class="page-content">
+
+<!-- ── HOME ─────────────────────────────────────────────────── -->
+<div id="tab-home" class="panel active">
+  <div class="hero-block">
+    <div class="hero-title">Network+<br><em>Field Manual</em></div>
+    <p class="hero-sub">All five N10-009 domains. Flashcards, a speed game, and a quick-reference table — no distractions.</p>
+    <div class="stat-row">
+      <div class="stat-item"><span class="stat-num">200+</span><span class="stat-lbl">Flashcards</span></div>
+      <div class="stat-item"><span class="stat-num">5</span><span class="stat-lbl">Domains</span></div>
+      <div class="stat-item"><span class="stat-num">30</span><span class="stat-lbl">Port Q's</span></div>
+    </div>
+  </div>
+
+  <div class="sec-label">Study by Domain</div>
+  <div class="domain-grid" id="domainGrid"></div>
+
+  <div class="sec-label">Quick Start</div>
+  <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+    <button class="btn btn-primary" onclick="switchDeck('all'); showTab('flash')">⊞ All Flashcards</button>
+    <button class="btn btn-gold" onclick="showTab('game')">▶ Port Rush Game</button>
+    <button class="btn btn-ghost" onclick="showTab('ref')">≡ Quick Reference</button>
+  </div>
+</div>
+
+<!-- ── FLASHCARDS ─────────────────────────────────────────────── -->
+<div id="tab-flash" class="panel">
+  <div class="sec-label">Flashcards</div>
+  <div class="fc-controls">
+    <select class="field-select" id="deckSelect" onchange="switchDeck(this.value)">
+      <option value="all">All Domains (200+ cards)</option>
+      <option value="networking-fundamentals">1 — Networking Fundamentals</option>
+      <option value="network-implementations">2 — Network Implementations</option>
+      <option value="network-operations">3 — Network Operations</option>
+      <option value="network-security">4 — Network Security</option>
+      <option value="network-troubleshooting">5 — Network Troubleshooting</option>
+      <option value="ports-protocols">Ports &amp; Protocols</option>
+      <option value="subnetting">Subnetting &amp; IP</option>
+      <option value="osi-model">OSI Model</option>
+    </select>
+    <div class="fc-meta">
+      <span id="cardCounter">1 / 20</span>
+      <div class="pbar"><div class="pfill" id="pfill" style="width:5%"></div></div>
+    </div>
+    <button class="btn btn-ghost" onclick="shuffleDeck()" style="padding:0.4rem 0.85rem;font-size:0.72rem">⇄</button>
+  </div>
+
+  <div class="card-scene">
+    <div class="card-inner" id="cardInner" onclick="flipCard()">
+      <div class="card-face card-front">
+        <div class="card-domain-tag" id="cardTag">NETWORKING FUNDAMENTALS</div>
+        <div class="card-q" id="cardQ">Loading…</div>
+        <div class="card-tap-hint">TAP TO REVEAL</div>
+      </div>
+      <div class="card-face card-back">
+        <div class="card-domain-tag">ANSWER</div>
+        <div class="card-a" id="cardA">…</div>
+        <div class="card-tap-hint">RATE BELOW</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rate-row" id="rateRow">
+    <button class="rate-btn r-again" onclick="rateCard('again')">Again</button>
+    <button class="rate-btn r-hard"  onclick="rateCard('hard')">Hard</button>
+    <button class="rate-btn r-good"  onclick="rateCard('good')">Good</button>
+    <button class="rate-btn r-easy"  onclick="rateCard('easy')">Easy</button>
+  </div>
+
+  <div class="card-nav-row">
+    <button class="btn btn-ghost" id="btnPrev" onclick="prevCard()">← Prev</button>
+    <button class="btn btn-primary" id="btnNext" onclick="nextCard()">Next →</button>
+    <button class="btn btn-ghost" onclick="restartDeck()">↺</button>
+  </div>
+</div>
+
+<!-- ── PORT RUSH ──────────────────────────────────────────────── -->
+<div id="tab-game" class="panel">
+  <div class="sec-label">Port Rush</div>
+
+  <div id="gameActive" style="display:none">
+    <div class="game-hud">
+      <div class="hud-stats">
+        <div class="hud-s"><span class="hud-val" id="gsScore">0</span><span class="hud-lbl">Score</span></div>
+        <div class="hud-s"><span class="hud-val olive" id="gsCorrect">0</span><span class="hud-lbl">Correct</span></div>
+        <div class="hud-s"><span class="hud-val" id="gsStreak">0</span><span class="hud-lbl">Streak</span></div>
+        <div class="hud-s"><span class="hud-val" id="gsQ">1/20</span><span class="hud-lbl">Question</span></div>
+      </div>
+      <div class="timer-wrap">
+        <svg viewBox="0 0 52 52" width="52" height="52">
+          <circle class="t-bg" cx="26" cy="26" r="22"/>
+          <circle class="t-fill" id="tFill" cx="26" cy="26" r="22"
+            stroke-dasharray="138.2" stroke-dashoffset="0"/>
+        </svg>
+        <div class="timer-num" id="tNum">15</div>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-eyebrow">Identify the port number</div>
+      <div class="prompt-service" id="pService">—</div>
+      <div class="prompt-proto" id="pProto"></div>
+    </div>
+
+    <div class="answers-grid" id="answersGrid"></div>
+    <div class="feedback-bar" id="feedbackBar"></div>
+  </div>
+
+  <!-- Splash (start / end) -->
+  <div class="game-splash" id="gameSplash">
+    <h2 id="splashTitle">Port Rush</h2>
+    <p id="splashBody">20 questions · 15 seconds each<br>Score = accuracy + speed bonus + streak multiplier</p>
+    <div id="resultSection" style="display:none">
+      <div class="final-score" id="finalScore">0</div>
+      <div style="font-size:0.72rem;color:var(--dim);font-family:var(--mono);margin-bottom:1rem">FINAL SCORE</div>
+      <div class="result-grid">
+        <div class="res-stat"><span class="res-num" id="rCorrect">0</span><span class="res-lbl">Correct</span></div>
+        <div class="res-stat"><span class="res-num" id="rWrong">0</span><span class="res-lbl">Wrong</span></div>
+        <div class="res-stat"><span class="res-num" id="rBest">0</span><span class="res-lbl">Best Streak</span></div>
+        <div class="res-stat"><span class="res-num" id="rAcc">0%</span><span class="res-lbl">Accuracy</span></div>
+      </div>
+    </div>
+    <div style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;">
+      <button class="btn btn-primary" onclick="startGame()" style="font-size:0.9rem;padding:0.65rem 2rem">▶ Start</button>
+      <button class="btn btn-ghost" onclick="showTab('ref')">≡ Study Ports First</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── QUICK REF ──────────────────────────────────────────────── -->
+<div id="tab-ref" class="panel">
+  <div class="sec-label">Ports &amp; Protocols — N10-009</div>
+  <table class="ref-table">
+    <thead><tr><th>Port</th><th>Transport</th><th>Service</th></tr></thead>
+    <tbody id="refBody"></tbody>
+  </table>
+
+  <div class="sec-label">OSI Model</div>
+  <table class="ref-table">
+    <thead><tr><th>Layer</th><th>Name</th><th>PDU</th><th>Key Tech</th></tr></thead>
+    <tbody>
+      <tr><td>7</td><td>Application</td><td>Data</td><td>HTTP, FTP, SMTP, DNS, DHCP, SNMP</td></tr>
+      <tr><td>6</td><td>Presentation</td><td>Data</td><td>TLS/SSL, JPEG, compression, encryption</td></tr>
+      <tr><td>5</td><td>Session</td><td>Data</td><td>NetBIOS, RPC, SIP — setup/teardown</td></tr>
+      <tr><td>4</td><td>Transport</td><td>Segment</td><td>TCP, UDP — ports, windowing, flow control</td></tr>
+      <tr><td>3</td><td>Network</td><td>Packet</td><td>IP, ICMP, OSPF, BGP — Router</td></tr>
+      <tr><td>2</td><td>Data Link</td><td>Frame</td><td>Ethernet, MAC, ARP, 802.1Q — Switch</td></tr>
+      <tr><td>1</td><td>Physical</td><td>Bit</td><td>Cables, fiber, hubs, NICs, signals</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sec-label">IP Classes &amp; Private Ranges</div>
+  <table class="ref-table">
+    <thead><tr><th>Class / Range</th><th>1st Octet</th><th>Mask</th><th>Hosts</th></tr></thead>
+    <tbody>
+      <tr><td>Class A</td><td>1–126</td><td>/8</td><td>16,777,214</td></tr>
+      <tr><td>Class B</td><td>128–191</td><td>/16</td><td>65,534</td></tr>
+      <tr><td>Class C</td><td>192–223</td><td>/24</td><td>254</td></tr>
+      <tr><td>10.0.0.0/8</td><td>RFC1918</td><td>Private A</td><td>—</td></tr>
+      <tr><td>172.16–31/12</td><td>RFC1918</td><td>Private B</td><td>—</td></tr>
+      <tr><td>192.168.x/16</td><td>RFC1918</td><td>Private C</td><td>—</td></tr>
+      <tr><td>127.0.0.1</td><td>Loopback</td><td>—</td><td>—</td></tr>
+      <tr><td>169.254.x.x</td><td>APIPA</td><td>—</td><td>—</td></tr>
+    </tbody>
+  </table>
+</div>
+
+</div><!-- /page-content -->
+
+<!-- BOTTOM NAV (mobile) -->
+<nav id="bottomNav">
+  <div class="bottom-tabs">
+    <button class="bot-tab active" onclick="showTab('home')" data-tab="home">
+      <span class="bicon">◈</span>Home
+    </button>
+    <button class="bot-tab" onclick="showTab('flash')" data-tab="flash">
+      <span class="bicon">⊞</span>Cards
+    </button>
+    <button class="bot-tab" onclick="showTab('game')" data-tab="game">
+      <span class="bicon">▶</span>Port Rush
+    </button>
+    <button class="bot-tab" onclick="showTab('ref')" data-tab="ref">
+      <span class="bicon">≡</span>Ref
+    </button>
+  </div>
+</nav>
+
+<!-- INSTALL BAR -->
+<div id="installBar">
+  <p>Add <strong>N+ Fieldbook</strong> to your home screen for offline access</p>
+  <div class="install-btns">
+    <button class="btn btn-primary" id="installBtn" style="font-size:0.72rem;padding:0.4rem 0.9rem">Install</button>
+    <button class="btn btn-ghost" id="dismissInstall" style="font-size:0.72rem;padding:0.4rem 0.7rem">✕</button>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+// ── CARD DATA ────────────────────────────────────────────────────
+const CARDS = {
+  'networking-fundamentals': [
+    {q:"What does OSI stand for?", a:"Open Systems Interconnection — a 7-layer conceptual model for how data communicates between systems."},
+    {q:"What is a subnet mask?", a:"A 32-bit value that divides an IP address into network and host portions. E.g., 255.255.255.0 = /24."},
+    {q:"What is CIDR notation?", a:"Classless Inter-Domain Routing — expresses subnet mask as a prefix length after a slash. E.g., 192.168.1.0/24."},
+    {q:"What is the loopback address?", a:"127.0.0.1 (IPv4) or ::1 (IPv6) — used to test the network stack on the local machine."},
+    {q:"Difference between TCP and UDP?", a:"TCP is connection-oriented, reliable, ordered. UDP is connectionless, faster, no guaranteed delivery."},
+    {q:"What is a MAC address?", a:"Media Access Control — a 48-bit hardware address burned into a NIC, used for Layer 2 (Data Link) communication."},
+    {q:"What is ARP?", a:"Address Resolution Protocol — resolves an IPv4 address to a MAC address on a local network segment."},
+    {q:"What is DHCP?", a:"Dynamic Host Configuration Protocol — automatically assigns IP addresses, subnet mask, gateway, and DNS to clients."},
+    {q:"What is DNS?", a:"Domain Name System — translates human-readable domain names (google.com) to IP addresses."},
+    {q:"What is a default gateway?", a:"The router IP address that a host sends traffic to when the destination is on a different network."},
+    {q:"What is NAT?", a:"Network Address Translation — maps private IPs to a public IP, allowing internal hosts to reach the internet."},
+    {q:"What is a VLAN?", a:"Virtual LAN — logically segments a network at Layer 2, isolating broadcast domains without separate physical hardware."},
+    {q:"What is a broadcast domain?", a:"A network segment where all devices receive broadcast traffic. Routers separate broadcast domains; switches do not."},
+    {q:"What is half-duplex vs full-duplex?", a:"Half-duplex: send OR receive at one time (walkie-talkie). Full-duplex: send AND receive simultaneously (phone call)."},
+    {q:"Hub vs switch vs router?", a:"Hub: Layer 1, broadcasts to all. Switch: Layer 2, forwards by MAC. Router: Layer 3, routes between networks."},
+    {q:"What is APIPA?", a:"Automatic Private IP Addressing — assigns 169.254.x.x when DHCP fails."},
+    {q:"What is a collision domain?", a:"A network segment where data packets can collide. Each switch port is its own collision domain."},
+    {q:"What is TTL?", a:"Time To Live — decremented by 1 at each router hop. When it hits 0, the packet is dropped to prevent routing loops."},
+    {q:"What is 802.11?", a:"IEEE standard for Wi-Fi wireless networking. Variants include 802.11a/b/g/n/ac/ax."},
+    {q:"What is QoS?", a:"Quality of Service — prioritizes traffic types (e.g., VoIP over file downloads) to ensure performance SLAs."},
+  ],
+  'network-implementations': [
+    {q:"What is OSPF?", a:"Open Shortest Path First — link-state routing protocol using Dijkstra's algorithm and cost (bandwidth) metric."},
+    {q:"What is BGP?", a:"Border Gateway Protocol — the internet's routing protocol; used between autonomous systems. Path vector protocol."},
+    {q:"What is EIGRP?", a:"Enhanced Interior Gateway Routing Protocol — Cisco proprietary hybrid protocol using bandwidth and delay metrics."},
+    {q:"What is STP?", a:"Spanning Tree Protocol (802.1D) — prevents Layer 2 switching loops by blocking redundant paths."},
+    {q:"What is RSTP?", a:"Rapid Spanning Tree Protocol (802.1w) — faster convergence than STP. Preferred in modern networks."},
+    {q:"What does PoE stand for?", a:"Power over Ethernet — delivers electrical power over Cat5e/6 cable to APs, cameras. IEEE 802.3af/at/bt."},
+    {q:"What is a trunk port?", a:"A switch port configured to carry traffic for multiple VLANs using 802.1Q tagging."},
+    {q:"What is 802.1Q?", a:"IEEE VLAN tagging standard — inserts a 4-byte tag into Ethernet frames to identify the VLAN."},
+    {q:"What is an access port?", a:"A switch port assigned to a single VLAN; the connected device is unaware of VLANs."},
+    {q:"What is LACP?", a:"Link Aggregation Control Protocol (802.3ad) — bundles multiple physical links for bandwidth and redundancy."},
+    {q:"What is a DMZ?", a:"Demilitarized Zone — a network segment between the internet and internal LAN that hosts public-facing servers."},
+    {q:"802.11ac (Wi-Fi 5) key improvements?", a:"8×8 MU-MIMO, 256-QAM, 160 MHz channels, 5 GHz only, up to ~6.9 Gbps throughput."},
+    {q:"What is WPA3?", a:"Wi-Fi Protected Access 3 — uses SAE (Simultaneous Authentication of Equals) replacing the PSK handshake."},
+    {q:"What is SSID?", a:"Service Set Identifier — the name of a wireless network broadcast in beacon frames."},
+    {q:"What is RIP?", a:"Routing Information Protocol — distance-vector using hop count (max 15). Simple but slow convergence; mostly legacy."},
+    {q:"What is a static route?", a:"A manually configured route that does not change unless an admin modifies it."},
+    {q:"What is MPLS?", a:"Multiprotocol Label Switching — forwards packets based on labels; used in WAN/service provider networks."},
+    {q:"Single-mode vs multi-mode fiber?", a:"SMF: laser, narrow core, long distances. MMF: LED, wide core, shorter distances, cheaper."},
+    {q:"What cable supports 10GBASE-T?", a:"Cat6A supports 10 Gbps up to 100 meters."},
+    {q:"What is a wireless channel?", a:"A specific frequency range for transmission. 2.4 GHz has channels 1, 6, 11 non-overlapping."},
+  ],
+  'network-operations': [
+    {q:"What is SNMP?", a:"Simple Network Management Protocol — monitors/manages devices. UDP port 161 (agent), 162 (traps)."},
+    {q:"What is a network baseline?", a:"A documented record of normal performance metrics — used to detect anomalies and measure changes."},
+    {q:"What is syslog?", a:"Protocol for sending system log messages to a centralized server. UDP port 514 by default."},
+    {q:"What is SIEM?", a:"Security Information and Event Management — aggregates and correlates logs and alerts for threat detection."},
+    {q:"What is NTP?", a:"Network Time Protocol — synchronizes device clocks. UDP port 123. Critical for Kerberos and log correlation."},
+    {q:"What does a protocol analyzer do?", a:"Captures and analyzes network traffic at the frame/packet level. Examples: Wireshark, tcpdump."},
+    {q:"What is MTTR?", a:"Mean Time To Repair — average time to restore a failed component. Lower is better."},
+    {q:"What is MTBF?", a:"Mean Time Between Failures — average time between hardware failures. Higher means more reliable."},
+    {q:"What is change management?", a:"A formal procedure to request, document, approve, implement, and review changes to minimize risk."},
+    {q:"What is a rollback plan?", a:"A pre-documented procedure to revert a system to its previous state if a change causes problems."},
+    {q:"What is IPAM?", a:"IP Address Management — tools and processes to plan, track, and manage IP address assignments."},
+    {q:"What is NetFlow?", a:"Cisco protocol collecting IP traffic metadata (src/dst IP, port, protocol, bytes) for analysis."},
+    {q:"What does VRRP do?", a:"Virtual Router Redundancy Protocol — provides default gateway redundancy by electing a master virtual router."},
+    {q:"What is HSRP?", a:"Hot Standby Router Protocol — Cisco proprietary gateway redundancy. Similar to VRRP."},
+    {q:"What is 802.1X?", a:"Port-based Network Access Control — authenticates devices before granting network access using RADIUS/EAP."},
+    {q:"What is a captive portal?", a:"A web page requiring auth or acceptance before granting internet access (e.g., hotel Wi-Fi)."},
+    {q:"What is SDN?", a:"Software-Defined Networking — separates control plane (decisions) from data plane (forwarding), centralizing control."},
+    {q:"What is a network tap?", a:"A hardware device that passively copies all traffic on a link for monitoring without disrupting traffic."},
+    {q:"What is a traffic shaper?", a:"Controls bandwidth by delaying or queuing packets to enforce QoS policies."},
+    {q:"What is a network diagram?", a:"Visually documents topology, devices, and connections. Logical and physical diagrams serve different purposes."},
+  ],
+  'network-security': [
+    {q:"Stateful vs stateless firewall?", a:"Stateful: tracks connection state table. Stateless: examines each packet in isolation without session context."},
+    {q:"What is a NGFW?", a:"Next-Generation Firewall — adds deep packet inspection, IDS/IPS, app-layer filtering, and SSL inspection."},
+    {q:"IDS vs IPS?", a:"IDS: monitors and alerts only. IPS: monitors and actively blocks threats inline."},
+    {q:"What is a DoS / DDoS attack?", a:"Denial of Service — overwhelms a target to make it unavailable. DDoS uses distributed sources."},
+    {q:"What is a man-in-the-middle attack?", a:"Attacker intercepts and relays communication between two parties who believe they are communicating directly."},
+    {q:"What is ARP poisoning?", a:"Attacker sends fake ARP replies to link their MAC to a legitimate IP, redirecting traffic through their machine."},
+    {q:"What is VLAN hopping?", a:"Attacker exploits switch misconfigs (double tagging or DTP) to access unauthorized VLANs."},
+    {q:"What is a honeypot?", a:"A decoy system that attracts attackers to detect intrusions and gather intelligence on attack methods."},
+    {q:"What is network segmentation?", a:"Dividing a network into zones to limit lateral movement, contain breaches, and enforce least-privilege access."},
+    {q:"What is IPSec?", a:"IP Security — authenticates and encrypts IP packets. Used in site-to-site VPNs. Transport and Tunnel modes."},
+    {q:"What does CIA stand for?", a:"Confidentiality, Integrity, Availability — the three core objectives of information security."},
+    {q:"What is port security on a switch?", a:"Limits MAC addresses allowed per port and/or locks specific MACs to a port."},
+    {q:"What is an evil twin attack?", a:"A rogue AP that mimics a legitimate AP's SSID to intercept wireless client connections."},
+    {q:"What is RADIUS?", a:"Remote Authentication Dial-In User Service — centralized AAA for network access. UDP 1812/1813."},
+    {q:"What is TACACS+?", a:"Cisco AAA protocol using TCP port 49. Fully separates authentication, authorization, and accounting."},
+    {q:"What is MAC flooding?", a:"Overwhelms a switch's CAM table, causing it to broadcast all frames like a hub — sniffable by attacker."},
+    {q:"What is least privilege?", a:"Users and systems should have only the minimum permissions necessary to perform their functions."},
+    {q:"What is a VPN?", a:"Virtual Private Network — encrypts traffic over a public network, creating a secure tunnel between endpoints."},
+    {q:"What is WPA2 weakness?", a:"Vulnerable to KRACK (Key Reinstallation Attack) on the 4-way handshake. WPA3 mitigates this with SAE."},
+    {q:"What is 802.1X used for?", a:"Port-based NAC — ensures only authenticated devices connect via RADIUS/EAP before granting access."},
+  ],
+  'network-troubleshooting': [
+    {q:"What does ping test?", a:"Sends ICMP Echo Requests and measures RTT. Tests Layer 3 reachability between two hosts."},
+    {q:"What does traceroute/tracert do?", a:"Shows the hop-by-hop path to a destination and RTT at each router. Uses ICMP TTL-exceeded messages."},
+    {q:"What does nslookup/dig test?", a:"DNS resolution — verifies a domain name resolves to the correct IP via a DNS query."},
+    {q:"What does netstat show?", a:"Active connections, listening ports, routing table, and network interface statistics on a host."},
+    {q:"What does ipconfig / ifconfig show?", a:"IP address, subnet mask, default gateway, and MAC address of network interfaces."},
+    {q:"What is a duplex mismatch?", a:"One end is full-duplex, the other half-duplex — causes collisions, late collisions, slow performance."},
+    {q:"High CRC errors on an interface mean?", a:"Layer 1 problem — bad cable, EMI interference, damaged NIC, or dirty/damaged connector."},
+    {q:"What is a Layer 2 loop?", a:"Frames circulate endlessly in a switched network. Prevented by STP/RSTP blocking redundant paths."},
+    {q:"What does 'Destination host unreachable' mean?", a:"The router has no route to the destination — no entry in the routing table."},
+    {q:"'Request timed out' in ping means?", a:"Packets may have reached destination but reply didn't return — host down, ICMP blocked, or firewall dropping."},
+    {q:"What causes an IP conflict?", a:"Two devices share the same IP address — usually static assignment conflicting with the DHCP pool."},
+    {q:"What tool captures packets?", a:"Wireshark (GUI) or tcpdump (CLI) — capture raw frames for protocol-level analysis."},
+    {q:"What does arp -a show?", a:"The ARP cache — a table of IP-to-MAC address mappings the host has recently resolved."},
+    {q:"What does route print / ip route show?", a:"The routing table — all known routes, next-hop, and interface for each destination."},
+    {q:"What is a broadcast storm?", a:"Excessive broadcast traffic from a Layer 2 loop or misconfiguration; consumes all bandwidth."},
+    {q:"Step 1 of CompTIA's troubleshooting model?", a:"Identify the problem — gather information, question users, check what changed recently."},
+    {q:"What does a cable tester verify?", a:"Continuity, pin mapping, opens, shorts, reversed pairs, and split pairs on UTP cable."},
+    {q:"What does show interfaces on a switch show?", a:"Interface status, speed, duplex, error counters (CRC, input/output errors, collisions)."},
+    {q:"What causes high input errors?", a:"CRC mismatches usually from Layer 1 issues — bad cable, incorrect cable type, duplex mismatch."},
+    {q:"What is nmap used for in troubleshooting?", a:"Port scanning — identifies which TCP/UDP ports are open on a host. Also used for security audits."},
+  ],
+  'ports-protocols': [
+    {q:"Port 20 / 21", a:"FTP — File Transfer Protocol. Port 21 = control channel, Port 20 = data transfer. TCP. Unencrypted."},
+    {q:"Port 22", a:"SSH — Secure Shell. Encrypted remote terminal access. TCP. Replaces Telnet."},
+    {q:"Port 23", a:"Telnet — Unencrypted remote terminal. TCP. Replaced by SSH in secure environments."},
+    {q:"Port 25", a:"SMTP — Simple Mail Transfer Protocol. Sends email between mail servers. TCP."},
+    {q:"Port 53", a:"DNS — Domain Name System. TCP (zone transfers) + UDP (queries)."},
+    {q:"Port 67 / 68", a:"DHCP — Port 67 server, 68 client. UDP. Assigns IP addresses automatically."},
+    {q:"Port 69", a:"TFTP — Trivial File Transfer Protocol. UDP. No auth. Used for PXE boot and IOS image transfers."},
+    {q:"Port 80", a:"HTTP — HyperText Transfer Protocol. Unencrypted web traffic. TCP."},
+    {q:"Port 110", a:"POP3 — Post Office Protocol v3. Downloads email from server to client. TCP."},
+    {q:"Port 123", a:"NTP — Network Time Protocol. Synchronizes system clocks. UDP."},
+    {q:"Port 143", a:"IMAP — Internet Message Access Protocol. Reads email on server without full download. TCP."},
+    {q:"Port 161 / 162", a:"SNMP — 161 agent polling, 162 traps. UDP. Network device monitoring."},
+    {q:"Port 389", a:"LDAP — Lightweight Directory Access Protocol. Active Directory lookups. TCP/UDP."},
+    {q:"Port 443", a:"HTTPS — HTTP over TLS. Encrypted web traffic. TCP."},
+    {q:"Port 445", a:"SMB / CIFS — Windows file sharing. TCP. Target of EternalBlue/WannaCry."},
+    {q:"Port 514", a:"Syslog. UDP. Sends log messages to a centralized log server."},
+    {q:"Port 587", a:"SMTP Submission — authenticated email from client to server. TCP. Modern standard."},
+    {q:"Port 636", a:"LDAPS — LDAP over SSL/TLS. Encrypted directory access. TCP."},
+    {q:"Port 993", a:"IMAPS — IMAP over SSL. Encrypted email access. TCP."},
+    {q:"Port 995", a:"POP3S — POP3 over SSL. Encrypted email download. TCP."},
+    {q:"Port 1433", a:"Microsoft SQL Server. TCP."},
+    {q:"Port 1812 / 1813", a:"RADIUS — 1812 authentication, 1813 accounting. UDP."},
+    {q:"Port 3306", a:"MySQL / MariaDB database server. TCP."},
+    {q:"Port 3389", a:"RDP — Remote Desktop Protocol. Encrypted remote GUI for Windows. TCP/UDP."},
+    {q:"Port 5060 / 5061", a:"SIP — Session Initiation Protocol. VoIP setup. 5060 unencrypted, 5061 TLS."},
+    {q:"Port 8080", a:"HTTP Alternate / web proxy. TCP. Used when port 80 is occupied."},
+  ],
+  'subnetting': [
+    {q:"Usable hosts on a /24?", a:"254. Formula: 2^8 − 2 = 254. Network + broadcast addresses are reserved."},
+    {q:"Network address of 192.168.1.50/26?", a:"192.168.1.32. /26 has 64-address blocks: .0, .64, .128, .192. Host .50 falls in the .32 block."},
+    {q:"What is a /30 subnet for?", a:"Point-to-point WAN links. Provides exactly 2 usable host addresses."},
+    {q:"How many /27 subnets fit in a /24?", a:"8 subnets. Borrows 3 bits: 2^3 = 8. Each subnet has 30 usable hosts."},
+    {q:"What is VLSM?", a:"Variable Length Subnet Masking — allows different-sized subnets within one network for efficient allocation."},
+    {q:"Broadcast address of 10.0.0.0/8?", a:"10.255.255.255"},
+    {q:"What is a /32 route?", a:"A host route — represents a single specific IP. Used in routing tables for specific host entries."},
+    {q:"What is route aggregation / supernetting?", a:"Combining contiguous networks into one larger block. E.g., 10.0.0.0/24 + 10.0.1.0/24 = 10.0.0.0/23."},
+    {q:"How many bits in an IPv6 address?", a:"128 bits. Written as 8 groups of 4 hex digits separated by colons."},
+    {q:"IPv6 link-local prefix?", a:"FE80::/10 — auto-configured on every interface; not routable beyond the local link."},
+  ],
+  'osi-model': [
+    {q:"OSI Layer 1 — Physical", a:"Transmits raw bits. Cables, fiber, hubs, NICs, voltages, signal encoding."},
+    {q:"OSI Layer 2 — Data Link", a:"Frames data, MAC addressing, error detection (CRC). Switches and bridges operate here."},
+    {q:"OSI Layer 3 — Network", a:"Logical addressing (IP), routing between networks. Routers operate here."},
+    {q:"OSI Layer 4 — Transport", a:"End-to-end delivery, segmentation, flow control, error recovery. TCP and UDP. Uses port numbers."},
+    {q:"OSI Layer 5 — Session", a:"Establishes, manages, and terminates sessions between applications. NetBIOS, RPC."},
+    {q:"OSI Layer 6 — Presentation", a:"Data translation, encryption, compression. TLS/SSL, JPEG, ASCII encoding."},
+    {q:"OSI Layer 7 — Application", a:"Network services to end-user apps. HTTP, FTP, SMTP, DNS, DHCP — what the user sees."},
+    {q:"What layer does a switch operate at?", a:"Layer 2 (Data Link) — forwards frames using MAC addresses. L3 switch adds routing."},
+    {q:"What layer does a router operate at?", a:"Layer 3 (Network) — routes packets based on IP addresses."},
+    {q:"PDU at each layer?", a:"L7–5: Data | L4: Segment/Datagram | L3: Packet | L2: Frame | L1: Bit"},
+  ],
+};
+CARDS['all'] = Object.values(CARDS).flat();
+
+const DOMAIN_META = {
+  'networking-fundamentals': { icon:'🌐', label:'Networking Fundamentals' },
+  'network-implementations':  { icon:'🔌', label:'Network Implementations'  },
+  'network-operations':       { icon:'📊', label:'Network Operations'        },
+  'network-security':         { icon:'🔒', label:'Network Security'          },
+  'network-troubleshooting':  { icon:'🔧', label:'Network Troubleshooting'   },
+  'ports-protocols':          { icon:'🔢', label:'Ports & Protocols'         },
+  'subnetting':               { icon:'📐', label:'Subnetting & IP'           },
+  'osi-model':                { icon:'📚', label:'OSI Model'                 },
+};
+
+// ── DOMAIN GRID ──────────────────────────────────────────────────
+(function(){
+  const grid = document.getElementById('domainGrid');
+  Object.entries(DOMAIN_META).forEach(([key, m]) => {
+    const n = CARDS[key].length;
+    const d = document.createElement('div');
+    d.className = 'domain-card';
+    d.innerHTML = `<div class="dc-icon">${m.icon}</div><div class="dc-info"><div class="dc-name">${m.label}</div><div class="dc-count">${n} cards</div></div>`;
+    d.addEventListener('click', () => { switchDeck(key); showTab('flash'); });
+    grid.appendChild(d);
+  });
+})();
+
+// ── FLASHCARD ENGINE ─────────────────────────────────────────────
+let deck = [], idx = 0, flipped = false;
+
+function switchDeck(key) {
+  const sel = document.getElementById('deckSelect');
+  if(sel) sel.value = key;
+  deck = [...CARDS[key]];
+  idx = 0; flipped = false;
+  document.getElementById('cardInner').classList.remove('flipped');
+  document.getElementById('rateRow').classList.remove('show');
+  loadCard();
+}
+
+function loadCard() {
+  if(!deck.length) return;
+  const c = deck[idx];
+  const tag = Object.entries(DOMAIN_META).find(([k]) => (CARDS[k]||[]).includes(c));
+  document.getElementById('cardTag').textContent = tag ? tag[1].label.toUpperCase() : 'NETWORK+';
+  document.getElementById('cardQ').textContent = c.q;
+  document.getElementById('cardA').textContent = c.a;
+  const pct = ((idx+1)/deck.length*100).toFixed(0);
+  document.getElementById('cardCounter').textContent = `${idx+1} / ${deck.length}`;
+  document.getElementById('pfill').style.width = pct + '%';
+  document.getElementById('btnPrev').disabled = idx === 0;
+  document.getElementById('btnNext').disabled = idx === deck.length-1;
+  flipped = false;
+  document.getElementById('cardInner').classList.remove('flipped');
+  document.getElementById('rateRow').classList.remove('show');
+}
+
+function flipCard() {
+  flipped = !flipped;
+  document.getElementById('cardInner').classList.toggle('flipped', flipped);
+  if(flipped) document.getElementById('rateRow').classList.add('show');
+}
+function nextCard() { if(idx < deck.length-1){ idx++; loadCard(); } }
+function prevCard() { if(idx > 0){ idx--; loadCard(); } }
+function restartDeck() { idx = 0; loadCard(); }
+function shuffleDeck() {
+  for(let i=deck.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));[deck[i],deck[j]]=[deck[j],deck[i]];
+  }
+  idx=0; loadCard(); showToast('Deck shuffled');
+}
+function rateCard(r){
+  const msgs={again:'Added back for review',hard:'Marked hard',good:'Moving on',easy:'Marked easy'};
+  showToast(msgs[r]);
+  if(r==='again'){
+    const c=deck.splice(idx,1)[0];
+    deck.splice(Math.min(idx+3,deck.length),0,c);
+    if(idx>=deck.length) idx=deck.length-1;
+  } else { if(idx<deck.length-1) idx++; }
+  loadCard();
+}
+switchDeck('networking-fundamentals');
+
+// ── PORT RUSH ────────────────────────────────────────────────────
+const PORTS = [
+  {s:'FTP (Control)',   p:21,   t:'TCP'},{s:'FTP (Data)',      p:20,   t:'TCP'},
+  {s:'SSH',             p:22,   t:'TCP'},{s:'Telnet',          p:23,   t:'TCP'},
+  {s:'SMTP',            p:25,   t:'TCP'},{s:'DNS',             p:53,   t:'TCP/UDP'},
+  {s:'DHCP Server',     p:67,   t:'UDP'},{s:'TFTP',            p:69,   t:'UDP'},
+  {s:'HTTP',            p:80,   t:'TCP'},{s:'Kerberos',        p:88,   t:'TCP/UDP'},
+  {s:'POP3',            p:110,  t:'TCP'},{s:'NTP',             p:123,  t:'UDP'},
+  {s:'IMAP',            p:143,  t:'TCP'},{s:'SNMP Agent',      p:161,  t:'UDP'},
+  {s:'SNMP Trap',       p:162,  t:'UDP'},{s:'LDAP',            p:389,  t:'TCP'},
+  {s:'HTTPS',           p:443,  t:'TCP'},{s:'SMB / CIFS',      p:445,  t:'TCP'},
+  {s:'Syslog',          p:514,  t:'UDP'},{s:'SMTP Submission', p:587,  t:'TCP'},
+  {s:'LDAPS',           p:636,  t:'TCP'},{s:'IMAPS',           p:993,  t:'TCP'},
+  {s:'POP3S',           p:995,  t:'TCP'},{s:'MSSQL',           p:1433, t:'TCP'},
+  {s:'RADIUS Auth',     p:1812, t:'UDP'},{s:'RADIUS Acct',     p:1813, t:'UDP'},
+  {s:'MySQL',           p:3306, t:'TCP'},{s:'RDP',             p:3389, t:'TCP'},
+  {s:'SIP',             p:5060, t:'TCP/UDP'},{s:'HTTP Alt',    p:8080, t:'TCP'},
+];
+
+let gQs=[],gI=0,gScore=0,gCorrect=0,gWrong=0,gStreak=0,gBest=0,gTimer=null,gTime=15,gRunning=false;
+const TQ=20, TP=15;
+
+function rng(arr){ for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}return arr; }
+
+function startGame(){
+  document.getElementById('gameSplash').style.display='none';
+  document.getElementById('gameActive').style.display='block';
+  gQs=rng([...PORTS]).slice(0,TQ);
+  gI=gScore=gCorrect=gWrong=gStreak=gBest=0;
+  gRunning=true;
+  updateHUD(); loadQ();
+}
+
+function loadQ(){
+  if(gI>=TQ){ endGame(); return; }
+  const q=gQs[gI];
+  document.getElementById('pService').textContent=q.s;
+  document.getElementById('pProto').textContent='Transport: '+q.t;
+  document.getElementById('gsQ').textContent=`${gI+1}/${TQ}`;
+  document.getElementById('feedbackBar').textContent='';
+  document.getElementById('feedbackBar').style.color='var(--dim)';
+
+  const allP=PORTS.map(p=>p.p);
+  let opts=new Set([q.p]);
+  while(opts.size<4) opts.add(allP[Math.floor(Math.random()*allP.length)]);
+  opts=rng([...opts]);
+
+  const grid=document.getElementById('answersGrid');
+  grid.innerHTML='';
+  opts.forEach(port=>{
+    const b=document.createElement('button');
+    b.className='ans-btn'; b.textContent=port;
+    b.addEventListener('click',()=>pick(port,q.p,b));
+    grid.appendChild(b);
+  });
+  startTimer();
+}
+
+function startTimer(){
+  clearInterval(gTimer); gTime=TP; updateTimer();
+  gTimer=setInterval(()=>{ gTime--; updateTimer(); if(gTime<=0){clearInterval(gTimer);timeUp();} },1000);
+}
+function updateTimer(){
+  const circ=document.getElementById('tFill');
+  const C=2*Math.PI*22;
+  circ.style.strokeDasharray=C;
+  circ.style.strokeDashoffset=C*(1-gTime/TP);
+  document.getElementById('tNum').textContent=gTime;
+  if(gTime<=5){ circ.style.stroke='var(--red)'; document.getElementById('tNum').style.color='var(--red)'; }
+  else if(gTime<=8){ circ.style.stroke='var(--gold)'; document.getElementById('tNum').style.color='var(--gold)'; }
+  else{ circ.style.stroke='var(--olive)'; document.getElementById('tNum').style.color='var(--olive)'; }
+}
+function disableAll(){ document.querySelectorAll('.ans-btn').forEach(b=>b.disabled=true); }
+function markCorrect(cp){ document.querySelectorAll('.ans-btn').forEach(b=>{ if(parseInt(b.textContent)===cp && !b.classList.contains('wrong')) b.classList.add('correct'); }); }
+
+function timeUp(){
+  disableAll(); const cp=gQs[gI].p; markCorrect(cp);
+  document.getElementById('feedbackBar').textContent=`TIME — correct answer: ${cp}`;
+  document.getElementById('feedbackBar').style.color='var(--gold)';
+  gStreak=0; gWrong++; updateHUD();
+  setTimeout(()=>{ gI++; loadQ(); },1800);
+}
+
+function pick(sel,correct,btn){
+  if(!gRunning) return;
+  clearInterval(gTimer); disableAll();
+  const bonus=Math.floor(gTime/TP*50);
+  if(sel===correct){
+    btn.classList.add('correct');
+    gCorrect++; gStreak++; if(gStreak>gBest) gBest=gStreak;
+    const streak=gStreak>2?(gStreak-2)*5:0;
+    const pts=100+bonus+streak;
+    gScore+=pts;
+    document.getElementById('feedbackBar').textContent=`CORRECT +${pts}${gStreak>2?' ×'+gStreak+' STREAK':''}`;
+    document.getElementById('feedbackBar').style.color='var(--olive)';
+  } else {
+    btn.classList.add('wrong'); markCorrect(correct);
+    document.getElementById('feedbackBar').textContent=`NEGATIVE — port ${correct} is correct`;
+    document.getElementById('feedbackBar').style.color='var(--red)';
+    gStreak=0; gWrong++;
+  }
+  updateHUD();
+  setTimeout(()=>{ gI++; loadQ(); },1500);
+}
+
+function updateHUD(){
+  document.getElementById('gsScore').textContent=gScore;
+  document.getElementById('gsCorrect').textContent=gCorrect;
+  document.getElementById('gsStreak').textContent=gStreak;
+}
+
+function endGame(){
+  gRunning=false; clearInterval(gTimer);
+  document.getElementById('gameActive').style.display='none';
+  const splash=document.getElementById('gameSplash');
+  splash.style.display='block';
+  document.getElementById('splashTitle').textContent='DEBRIEF';
+  document.getElementById('splashBody').textContent='';
+  document.getElementById('resultSection').style.display='block';
+  document.getElementById('finalScore').textContent=gScore;
+  document.getElementById('rCorrect').textContent=gCorrect;
+  document.getElementById('rWrong').textContent=gWrong;
+  document.getElementById('rBest').textContent=gBest;
+  document.getElementById('rAcc').textContent=Math.round(gCorrect/TQ*100)+'%';
+}
+
+// ── REF TABLE ────────────────────────────────────────────────────
+const REF=[
+  [20,'TCP','FTP Data'],[21,'TCP','FTP Control'],[22,'TCP','SSH'],
+  [23,'TCP','Telnet'],[25,'TCP','SMTP'],[53,'TCP/UDP','DNS'],
+  [67,'UDP','DHCP Server'],[68,'UDP','DHCP Client'],[69,'UDP','TFTP'],
+  [80,'TCP','HTTP'],[88,'TCP/UDP','Kerberos'],[110,'TCP','POP3'],
+  [123,'UDP','NTP'],[143,'TCP','IMAP'],[161,'UDP','SNMP Agent'],
+  [162,'UDP','SNMP Trap'],[389,'TCP','LDAP'],[443,'TCP','HTTPS'],
+  [445,'TCP','SMB / CIFS'],[514,'UDP','Syslog'],[587,'TCP','SMTP Submission'],
+  [636,'TCP','LDAPS'],[993,'TCP','IMAPS'],[995,'TCP','POP3S'],
+  [1433,'TCP','MSSQL'],[1812,'UDP','RADIUS Auth'],[1813,'UDP','RADIUS Acct'],
+  [3306,'TCP','MySQL'],[3389,'TCP','RDP'],[5060,'TCP/UDP','SIP'],[8080,'TCP','HTTP Alt'],
+];
+(function(){
+  const tb=document.getElementById('refBody');
+  REF.forEach(([port,proto,svc])=>{
+    const cls=proto==='TCP'?'b-tcp':proto==='UDP'?'b-udp':'b-both';
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${port}</td><td><span class="badge ${cls}">${proto}</span></td><td>${svc}</td>`;
+    tb.appendChild(tr);
+  });
+})();
+
+// ── NAV ──────────────────────────────────────────────────────────
+function showTab(id){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  document.querySelectorAll('[data-tab]').forEach(b=>{
+    b.classList.toggle('active', b.dataset.tab===id);
+  });
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ── TOAST ─────────────────────────────────────────────────────────
+let toastTm;
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  clearTimeout(toastTm); toastTm=setTimeout(()=>t.classList.remove('show'),2000);
+}
+
+// ── KEYBOARD ─────────────────────────────────────────────────────
+document.addEventListener('keydown',e=>{
+  if(e.key===' '||e.key==='Enter'){
+    if(document.getElementById('tab-flash').classList.contains('active')){e.preventDefault();flipCard();}
+  }
+  if(e.key==='ArrowRight') nextCard();
+  if(e.key==='ArrowLeft') prevCard();
+});
+
+// ── PWA ──────────────────────────────────────────────────────────
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('./sw.js').then(()=>{
+    document.getElementById('swBadge').classList.add('visible');
+  });
+}
+window.addEventListener('offline',()=>document.getElementById('offlineBanner').classList.add('show'));
+window.addEventListener('online', ()=>document.getElementById('offlineBanner').classList.remove('show'));
+if(!navigator.onLine) document.getElementById('offlineBanner').classList.add('show');
+
+let deferredPrompt=null;
+window.addEventListener('beforeinstallprompt',e=>{
+  e.preventDefault(); deferredPrompt=e;
+  if(!sessionStorage.getItem('installDismissed'))
+    setTimeout(()=>document.getElementById('installBar').classList.add('show'),3000);
+});
+document.getElementById('installBtn').addEventListener('click',async()=>{
+  if(!deferredPrompt) return;
+  deferredPrompt.prompt();
+  const{outcome}=await deferredPrompt.userChoice;
+  if(outcome==='accepted') showToast('App installed');
+  deferredPrompt=null;
+  document.getElementById('installBar').classList.remove('show');
+});
+document.getElementById('dismissInstall').addEventListener('click',()=>{
+  document.getElementById('installBar').classList.remove('show');
+  sessionStorage.setItem('installDismissed','1');
+});
+
+if(location.hash){
+  const t=location.hash.slice(1);
+  if(['home','flash','game','ref'].includes(t)) requestAnimationFrame(()=>showTab(t));
+}
+</script>
+</body>
+</html>
