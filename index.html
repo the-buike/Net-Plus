@@ -533,8 +533,8 @@ body {
     <div class="hero-title">Network+<br><em>Field Manual</em></div>
     <p class="hero-sub">All five N10-009 domains. Flashcards, a speed game, and a quick-reference table — no distractions.</p>
     <div class="stat-row">
-      <div class="stat-item"><span class="stat-num">200+</span><span class="stat-lbl">Flashcards</span></div>
-      <div class="stat-item"><span class="stat-num">5</span><span class="stat-lbl">Domains</span></div>
+      <div class="stat-item"><span class="stat-num">260+</span><span class="stat-lbl">Flashcards</span></div>
+      <div class="stat-item"><span class="stat-num">10</span><span class="stat-lbl">Decks</span></div>
       <div class="stat-item"><span class="stat-num">30</span><span class="stat-lbl">Port Q's</span></div>
     </div>
   </div>
@@ -564,6 +564,8 @@ body {
       <option value="ports-protocols">Ports &amp; Protocols</option>
       <option value="subnetting">Subnetting &amp; IP</option>
       <option value="osi-model">OSI Model</option>
+      <option value="ieee-standards">IEEE Standards</option>
+      <option value="cloud-concepts">Cloud Concepts</option>
     </select>
     <div class="fc-meta">
       <span id="cardCounter">1 / 20</span>
@@ -888,6 +890,70 @@ const CARDS = {
     {q:"What layer does a router operate at?", a:"Layer 3 (Network) — routes packets based on IP addresses."},
     {q:"PDU at each layer?", a:"L7–5: Data | L4: Segment/Datagram | L3: Packet | L2: Frame | L1: Bit"},
   ],
+  'ieee-standards': [
+    {q:"What is IEEE 802.3?", a:"The standard for wired Ethernet. Defines physical and data link layer specs for LAN communication over copper and fiber."},
+    {q:"What is 10BASE-T?", a:"802.3 Ethernet — 10 Mbps over Cat3 UTP, up to 100m. Uses RJ-45. Obsolete but foundational."},
+    {q:"What is 100BASE-TX (Fast Ethernet)?", a:"802.3u — 100 Mbps over Cat5 UTP, up to 100m. RJ-45. Still common on older endpoints."},
+    {q:"What is 1000BASE-T (Gigabit Ethernet)?", a:"802.3ab — 1 Gbps over Cat5e/Cat6 UTP, up to 100m. Uses all 4 pairs. Standard for modern LANs."},
+    {q:"What is 1000BASE-SX?", a:"802.3z — 1 Gbps over multimode fiber. Up to 550m. Uses 850nm laser. Short-range building runs."},
+    {q:"What is 1000BASE-LX?", a:"802.3z — 1 Gbps over single-mode fiber. Up to 5km. Uses 1310nm laser. Cross-building and campus links."},
+    {q:"What is 10GBASE-T?", a:"802.3an — 10 Gbps over Cat6A UTP, up to 100m. Cat6 limited to 55m at 10G. Server/uplink use."},
+    {q:"What is 10GBASE-SR?", a:"802.3ae — 10 Gbps over multimode fiber. Up to 300m on OM3/OM4. Short-range data center runs."},
+    {q:"What is 10GBASE-LR?", a:"802.3ae — 10 Gbps over single-mode fiber. Up to 10km. Long-range campus and WAN links."},
+    {q:"What is IEEE 802.11a?", a:"Wi-Fi on 5 GHz band. Up to 54 Mbps. Less interference than 2.4 GHz. Range shorter than 802.11b/g."},
+    {q:"What is IEEE 802.11b?", a:"Wi-Fi on 2.4 GHz. Up to 11 Mbps. Long range, high interference. Mostly obsolete."},
+    {q:"What is IEEE 802.11g?", a:"Wi-Fi on 2.4 GHz. Up to 54 Mbps. Backward compatible with 802.11b. Largely replaced by 802.11n."},
+    {q:"What is IEEE 802.11n (Wi-Fi 4)?", a:"2.4 GHz and 5 GHz dual-band. Up to 600 Mbps. Introduced MIMO (multiple antennas). Channel bonding to 40 MHz."},
+    {q:"What is IEEE 802.11ac (Wi-Fi 5)?", a:"5 GHz only. Up to ~6.9 Gbps. MU-MIMO (8×8), 256-QAM, channels up to 160 MHz. Current enterprise standard."},
+    {q:"What is IEEE 802.11ax (Wi-Fi 6/6E)?", a:"2.4/5/6 GHz. Up to ~9.6 Gbps. Introduces OFDMA, BSS Coloring, TWT (Target Wake Time) for IoT efficiency."},
+    {q:"What is IEEE 802.1Q?", a:"VLAN tagging standard. Inserts a 4-byte tag (including 12-bit VLAN ID) into Ethernet frames. Supports up to 4094 VLANs."},
+    {q:"What is IEEE 802.1D?", a:"Original Spanning Tree Protocol (STP) — prevents Layer 2 loops by electing a root bridge and blocking redundant ports."},
+    {q:"What is IEEE 802.1w?", a:"Rapid Spanning Tree Protocol (RSTP) — faster convergence than 802.1D. Introduces edge ports and rapid state transitions."},
+    {q:"What is IEEE 802.1X?", a:"Port-based Network Access Control (NAC) — authenticates devices at Layer 2 before granting network access. Uses EAP and RADIUS."},
+    {q:"What is IEEE 802.3af?", a:"PoE standard — delivers up to 15.4W per port (12.95W usable) over Cat5 cable. Powers basic APs, IP phones."},
+    {q:"What is IEEE 802.3at (PoE+)?", a:"Enhanced PoE — delivers up to 30W per port (25.5W usable). Powers PTZ cameras, advanced APs, video phones."},
+    {q:"What is IEEE 802.3bt (PoE++)?", a:"High-power PoE — Type 3 up to 60W, Type 4 up to 100W. Powers laptops, displays, high-end APs."},
+    {q:"What is IEEE 802.3ad / LACP?", a:"Link Aggregation Control Protocol — combines multiple physical links into one logical link for bandwidth and redundancy. Dynamic negotiation."},
+    {q:"What frequency bands does 802.11n support?", a:"Both 2.4 GHz and 5 GHz (dual-band). First standard to support both simultaneously."},
+    {q:"What is channel bonding in 802.11?", a:"Combining adjacent channels for greater bandwidth. 802.11n: 40 MHz. 802.11ac: up to 160 MHz. Increases throughput."},
+    {q:"What is MU-MIMO?", a:"Multi-User Multiple Input Multiple Output — allows an AP to transmit to multiple clients simultaneously. 802.11ac (DL), 802.11ax (UL+DL)."},
+    {q:"What is OFDMA (802.11ax)?", a:"Orthogonal Frequency Division Multiple Access — splits a channel into sub-channels to serve multiple clients simultaneously. Improves dense environments."},
+    {q:"What is BSS Coloring (802.11ax)?", a:"Marks transmissions with a color code so devices can distinguish overlapping networks and reduce unnecessary deferrals."},
+    {q:"What is the 802.11 non-overlapping channels on 2.4 GHz?", a:"Channels 1, 6, and 11. Only these three don't overlap in the US 2.4 GHz band. Using others causes co-channel interference."},
+    {q:"What cable standard does 10GBASE-T require for full 100m?", a:"Cat6A (Augmented). Cat6 supports 10G only up to ~55m due to alien crosstalk limitations."},
+  ],
+  'cloud-concepts': [
+    {q:"What is IaaS?", a:"Infrastructure as a Service — provider supplies virtualized compute, storage, and networking. Customer manages OS and above. E.g., AWS EC2, Azure VMs."},
+    {q:"What is PaaS?", a:"Platform as a Service — provider manages infrastructure + OS + runtime. Customer deploys applications. E.g., Heroku, AWS Elastic Beanstalk, Azure App Service."},
+    {q:"What is SaaS?", a:"Software as a Service — fully managed application delivered over the internet. Customer just uses it. E.g., Microsoft 365, Salesforce, Google Workspace."},
+    {q:"What is DaaS?", a:"Desktop as a Service — virtual desktops hosted in the cloud, streamed to thin clients. E.g., Amazon WorkSpaces, Azure Virtual Desktop."},
+    {q:"What is a public cloud?", a:"Cloud infrastructure owned and operated by a third-party provider, available to any organization. E.g., AWS, Azure, GCP. Shared physical hardware."},
+    {q:"What is a private cloud?", a:"Cloud infrastructure dedicated to a single organization. Can be on-premises or hosted. Greater control and security than public cloud."},
+    {q:"What is a hybrid cloud?", a:"Combines public and private cloud environments, interconnected to allow data and application portability between them."},
+    {q:"What is a community cloud?", a:"Shared cloud infrastructure for organizations with common interests (e.g., healthcare, government). Shared cost, shared compliance requirements."},
+    {q:"What is elasticity in cloud?", a:"The ability to automatically scale resources up or down in real time based on demand. Distinguishes cloud from traditional static provisioning."},
+    {q:"What is scalability in cloud?", a:"The ability to increase capacity to handle greater workloads. Vertical (bigger instances) or horizontal (more instances)."},
+    {q:"What is multitenancy?", a:"Multiple customers share the same physical infrastructure while being logically isolated. Core economic model of public cloud."},
+    {q:"What is the shared responsibility model?", a:"Security duties are split between the cloud provider (physical, hypervisor, network) and the customer (OS, data, access). Split varies by service model."},
+    {q:"Shared responsibility — who owns what in IaaS?", a:"Provider: physical datacenter, networking hardware, hypervisor. Customer: OS, middleware, apps, data, identity, network config."},
+    {q:"Shared responsibility — who owns what in SaaS?", a:"Provider: everything except data and user access management. Customer: data classification and identity/access controls."},
+    {q:"What is a VPC / VNet?", a:"Virtual Private Cloud (AWS) or Virtual Network (Azure) — an isolated, logically defined network within a public cloud where you deploy resources."},
+    {q:"What is a cloud gateway?", a:"A device or service connecting an on-premises network to a cloud VPC/VNet. Can be a VPN gateway or dedicated circuit endpoint."},
+    {q:"What is a site-to-site VPN in cloud?", a:"An IPSec tunnel between an on-premises router and a cloud VPN gateway. Encrypted, internet-based. Lower cost than dedicated circuits."},
+    {q:"What is a dedicated/private WAN circuit to cloud?", a:"A private, non-internet connection to a cloud provider. E.g., AWS Direct Connect, Azure ExpressRoute. Lower latency, higher reliability."},
+    {q:"What is a CDN?", a:"Content Delivery Network — geographically distributed servers that cache and serve static content close to users. Reduces latency and origin load."},
+    {q:"What is a cloud load balancer?", a:"Distributes incoming traffic across multiple cloud instances for availability and performance. Can be Layer 4 (TCP) or Layer 7 (HTTP)."},
+    {q:"What is auto-scaling?", a:"A cloud feature that automatically adds or removes compute instances based on defined metrics (CPU, requests). Supports elasticity."},
+    {q:"What is a region vs availability zone?", a:"Region: geographic area with multiple data centers. Availability Zone (AZ): isolated data center within a region. Deploy across AZs for high availability."},
+    {q:"What is cloud bursting?", a:"Running workloads in a private cloud normally but automatically bursting to public cloud capacity during demand spikes."},
+    {q:"What is a managed service in cloud?", a:"A cloud resource where the provider handles patching, backups, and scaling. E.g., AWS RDS (managed database) vs. running your own DB on EC2."},
+    {q:"What is object storage?", a:"Cloud storage for unstructured data as objects (files + metadata + unique ID). Highly scalable. E.g., AWS S3, Azure Blob Storage. Not block-level."},
+    {q:"What is block storage in cloud?", a:"Low-latency storage presented as a raw disk to a VM. Used for OS volumes and databases. E.g., AWS EBS, Azure Managed Disks."},
+    {q:"What is a cloud access security broker (CASB)?", a:"Security policy enforcement point between users and cloud services. Provides visibility, compliance, and data security for SaaS/IaaS usage."},
+    {q:"What is SD-WAN?", a:"Software-Defined WAN — uses software to manage and optimize WAN connections (MPLS, broadband, LTE) dynamically. Often used for cloud branch connectivity."},
+    {q:"What is Zero Trust in a cloud context?", a:"Security model that assumes no implicit trust — every user, device, and connection is verified regardless of network location. Never trust, always verify."},
+    {q:"What network protocol connects cloud VPCs across providers or regions?", a:"BGP (Border Gateway Protocol) — used to exchange routes between cloud VPCs, transit gateways, and on-premises routers in hybrid/multi-cloud environments."},
+  ],
 };
 CARDS['all'] = Object.values(CARDS).flat();
 
@@ -900,6 +966,8 @@ const DOMAIN_META = {
   'ports-protocols':          { icon:'🔢', label:'Ports & Protocols'         },
   'subnetting':               { icon:'📐', label:'Subnetting & IP'           },
   'osi-model':                { icon:'📚', label:'OSI Model'                 },
+  'ieee-standards':           { icon:'📡', label:'IEEE Standards'            },
+  'cloud-concepts':           { icon:'☁', label:'Cloud Concepts'            },
 };
 
 // ── DOMAIN GRID ──────────────────────────────────────────────────
